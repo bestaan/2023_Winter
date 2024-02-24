@@ -1,43 +1,59 @@
 #include <iostream>
-#include <cstring>
+#include <cassert>
+#include <fstream>
 
 using namespace std;
 
-const int kMaxStr = 100; // 전역 상수
-
-int Min(int a, int b)
+bool CheckSorted(int* arr, int size)
 {
-    return a < b ? a : b; // 조건연산자(삼항연산자)
+	int sum = 0;
+	for (int i = 0; i < size-1; i++)
+	{
+		if (arr[i] > arr[i + 1])
+			return false;
+	}
+
+	return true;
+	
+}
+
+void Print(int* arr, int size)
+{
+	for (int i = 0; i < size; i++)
+		cout << arr[i] << " ";
+	cout << endl;
 }
 
 int main()
 {
-    // 문자열 복사
-    char str1[] = "Hello, World!";// 내부적으로 포인터임
-    char str2[kMaxStr];
+	// Selection Sort
+	// 힌트: swap()
+	
+		// 8 3 2 5 
+		// 2 3 8 5
+		// 2 3 8 5
+		// 2 3 5 8 
+		// 2 3 5 8 
 
-    // dest, src 안내 (복사할 메모리 크기 주의)
-    memcpy(str2, str1, Min(sizeof(str1), sizeof(str2)));
-    cout << str2 << endl;
+		int arr[] = { 8, 3, 2, 5, 1, 1, 2, 5, 8, 9 };
+		int size = sizeof(arr) / sizeof(arr[0]);
 
-    char *dynamic_array = new char[kMaxStr]; // new는 char type의 kMaxStr(100)개의 메모리를 만들어줘
-    //첫번째 주소를 줘서 배열처럼 사용할 수 있음 
+		int min_index ;
+		for (int i = 0; i < size-1 ; i++)
+		{
+			min_index = i;
+			for (int j = i + 1; j < size; j++)
+			{
+				if (arr[min_index] > arr[j])
+					min_index = j;
+			}
+			swap(arr[i], arr[min_index]);
+			
+			Print(arr, size);
 
-    // 주의: 동적할당 메모리는 변수 사이즈가 포인터 사이즈임 (배열이 아님)
-    memcpy(dynamic_array, str1, Min(sizeof(str1), sizeof(kMaxStr)));
-    // memcpy(dynamic_array, str2, kMaxStr);
-    cout << dynamic_array << endl;
+			cout << boolalpha;
+			cout << CheckSorted(arr, size);
+			cout << endl;
+		}
 
-    cout << str1 << " " << str2 << " " << dynamic_array << endl;
-    cout << size_t(str1) << " " << size_t(str2) << " " << size_t(dynamic_array) << endl;
-
-    // 보통 크기를 별도로 저장함
-
-    delete[] dynamic_array; // 배열 삭제시 []<- 숫자가 안들어가는 이유는 운영체제가 이미 알고있기 떄문이다 //더이상 사용하지 않을 메모리를 운영체제에 반납 
-
-    // 지우지 않고 재할당할 경우 잃어버림
-    // dynamic_array = new char[원하는크기];
-    // delete[] dynamic_array; 다시 지워줘야 함
-
-    return 0;
 }
