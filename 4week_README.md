@@ -11,4 +11,4 @@
 
 또한 선택정렬은 key는 정렬이 되었는데 value는 변경된 형태를 unstable하다고 하며 안정하지 않다. 
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/88d9bccb-bf54-4671-b57b-77951f4e9cc2/304f1aa1-f0dc-40ef-97d1-154cdb1930b2/Untitled.png)
+<img width="267" alt="image" src="https://github.com/eunjoyourlife/2023_Winter/assets/110014960/4be4fccc-9511-4619-a36c-db3d56a24b48">
